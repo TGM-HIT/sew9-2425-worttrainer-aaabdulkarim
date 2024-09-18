@@ -9,6 +9,12 @@ public class StatistikManager {
     private int anzahlRichtig;
     private int anzahlFalsch;
 
+    public StatistikManager(){
+        this.insgesamt = 0;
+        this.anzahlRichtig = 0;
+        this.anzahlFalsch = 0;
+    }
+
     /**
      * Fügt +1 hinzu zur Anzahl der richtigen Antworten
      */
