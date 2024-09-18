@@ -2,17 +2,19 @@
 'https://plantuml.com/class-diagram
 
 package model {
+
+
     class WortPaar {
         - String bildURL
         - String wort
-        + checkAnswer()
+        + checkAnswer() : boolean
     }
 
 
     class WortTrainer {
         - ArrayList<WortPaar> wortListe
         - int aktuellesIndex
-        + randomIndex()
+        + randomIndex() : int
     }
 }
 
@@ -29,13 +31,6 @@ package controller {
 
 
 
-class SaveUtility {
-    - String savePath
-    + saveWortTrainerSession(WortTrainer session)
-    + loadWortTrainerSession(String path)
-    + loadWortTrainerSession()
-    + setPath(String newPath)
-}
 
 WortTrainer "1" -- "0..*" WortPaar : >
 
