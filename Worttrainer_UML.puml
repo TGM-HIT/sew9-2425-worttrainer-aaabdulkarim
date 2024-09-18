@@ -19,6 +19,7 @@ package model {
         - statistikManager : StatistikManager
         - aktuellesIndex : int
 
+        + WortTrainer(wortListe : ArrayList<WortPaar>))
         + nextWort() : void
         + checkAntwort(antwort : String) : boolean
 
