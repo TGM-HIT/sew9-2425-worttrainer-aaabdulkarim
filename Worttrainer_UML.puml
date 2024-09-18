@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+package model {
+    class WortPaar {
+        - String bildURL
+        - String wort
+        + checkAnswer()
+    }
+
+
+    class WortTrainer {
+        - ArrayList<WortPaar> wortListe
+        - int aktuellesIndex
+        + randomIndex()
+    }
+}
+
+
+package view {
+    class ViewClass {
+    }
+}
+
+package controller {
+    class ControllClass {
+    }
+}
+
+
+
+class SaveUtility {
+    - String savePath
+    + saveWortTrainerSession(WortTrainer session)
+    + loadWortTrainerSession(String path)
+    + loadWortTrainerSession()
+    + setPath(String newPath)
+}
+
+WortTrainer "1" -- "0..*" WortPaar : >
+
+@enduml
