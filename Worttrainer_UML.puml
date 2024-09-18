@@ -7,21 +7,44 @@ package model {
     class WortPaar {
         - bildURL : String
         - wort : String
-        + checkAntwort() : boolean
-    }
 
+        + WortPaar(antwort : String, bildURL: String)
+        + checkAntwort(antwort : String) : boolean
+
+        + getWort() : String
+        + getBildURL() : String
+    }
 
     class WortTrainer {
         - wortListe : ArrayList<WortPaar>
         - statistikManager : StatistikManager
         - aktuellesIndex : int
-        + randomIndex() : int
+
+        + nextWort() : void
+        + checkAntwort(antwort : String) : boolean
+
+        + setWortListe(wortListe : ArrayList<WortPaar>) : void
+        + setStatistik(statistikManager : StatistikManager) : void
+
+        + getAktuellesWort() : WortPaar
     }
 
     class StatistikManager {
+        - insgesamt : int
         - anzahlRichtig : int
         - anzahlFalsch : int
+
         + addRichtig() : void
+        + addFalsch() : void
+        + toString() : String
+
+        + getInsgesamt() : int
+        + getAnzahlRichtig() : int
+        + getAnzahlFalsch() : int
+
+        + setInsgesamt(insgesamt : int) : void
+        + setAnzahlFalsch(anzahlFalsch : int) : void
+        + setAnzahlRichtig(anzahlRichtig : int) : void
     }
 }
 
@@ -39,7 +62,7 @@ package controller {
 
 
 
-WortTrainer "1" -- "0..*" WortPaar
-WortTrainer -- "1" StatistikManager
+WortTrainer "1" -> "0..*" WortPaar
+WortTrainer -> "1" StatistikManager
 
 @enduml
