@@ -3,7 +3,6 @@
 
 package model {
 
-
     class WortPaar {
         - bildURL : String
         - wort : String
