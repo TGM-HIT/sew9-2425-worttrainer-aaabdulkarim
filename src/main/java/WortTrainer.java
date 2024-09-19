@@ -47,6 +47,11 @@ public class WortTrainer {
     public boolean checkAntwort(String antwort){
         boolean wahrhaftigkeit =  getAktuellesWort().checkAntwort(antwort);
         nextWort();
+        if(wahrhaftigkeit){
+            statistikManager.addRichtig();
+        } else{
+            statistikManager.addFalsch();
+        }
         return wahrhaftigkeit;
     }
 
@@ -54,5 +59,19 @@ public class WortTrainer {
         return wortListe.get(this.aktuellesIndex);
     }
 
+    public void setWortListe(ArrayList<WortPaar> wortListe) {
+        if(wortListe != null){
+            this.wortListe = wortListe;
+        } else {
+            throw new IllegalArgumentException("Parameter darf nicht null sein");
+        }
+    }
 
+    public void setStatistikManager(StatistikManager sm) {
+        if(sm != null){
+            this.statistikManager = sm;
+        } else {
+            throw new IllegalArgumentException("Parameter darf nicht null sein");
+        }
+    }
 }
