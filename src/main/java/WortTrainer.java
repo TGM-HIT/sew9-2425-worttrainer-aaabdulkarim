@@ -12,6 +12,9 @@ public class WortTrainer {
     private StatistikManager statistikManager;
     private int aktuellesIndex;
 
+    /**
+     * Falls keine Dateien gespeichert sind werden vorgefertigte WortPaare genommen
+     */
     public WortTrainer(){
         setWortListe(new ArrayList<WortPaar>());
         setStatistikManager(new StatistikManager());
@@ -24,6 +27,10 @@ public class WortTrainer {
         this.wortListe.add(new WortPaar("Dose", "https://as1.ftcdn.net/v2/jpg/00/16/96/44/1000_F_16964494_iCMK2strv8ubvfjLB4zvgXJvR196WxO5.jpg"));
     }
 
+    /**
+     * Falls keine Dateien gespeichert sind werden vorgefertigte WortPaare genommen
+     * @param wortListe ist notwendig in dem Fall und kann als Lade Session verwendet werden
+     */
     public WortTrainer(ArrayList<WortPaar> wortListe) {
         setWortListe(wortListe);
         setStatistikManager(new StatistikManager());
@@ -36,6 +43,10 @@ public class WortTrainer {
 
     }
 
+    /**
+     * Wählt ein zufälliges Wort aus der Wortliste
+     * @return WortPaar zufällig ausgewählt
+     */
     public WortPaar nextWort(){
         Random rand = new Random();
 
@@ -44,6 +55,11 @@ public class WortTrainer {
         return getAktuellesWort();
     }
 
+    /**
+     * Überprüft ob die Antwort mit dem aktuellen Wort Paar übereinstimmt
+     * @param antwort String Antwort des User
+     * @return boolean
+     */
     public boolean checkAntwort(String antwort){
         boolean wahrhaftigkeit =  getAktuellesWort().checkAntwort(antwort);
         nextWort();

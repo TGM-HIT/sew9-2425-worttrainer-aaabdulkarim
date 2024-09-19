@@ -9,6 +9,9 @@ public class StatistikManager {
     private int anzahlRichtig;
     private int anzahlFalsch;
 
+    /**
+     * Anfangs wird alles auf 0 gesetzt
+     */
     public StatistikManager(){
         this.insgesamt = 0;
         this.anzahlRichtig = 0;

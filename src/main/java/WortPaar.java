@@ -8,11 +8,22 @@ public class WortPaar {
     private String wort;
     private String bildURL;
 
+
+    /**
+     * Benötigt Wort und Bild URL
+     * @param wort String
+     * @param bildURL String
+     */
     public WortPaar(String wort, String bildURL) {
         this.wort = (wort != null) ? wort : "";
         this.bildURL = (bildURL != null) ? bildURL : "";
     }
 
+    /**
+     * Überprüft ob der Paramater mit dem Wort in der Klasse als Attribut übereinstimmt
+     * @param antwort String Typ Antwort
+     * @return True Or False als Antwort
+     */
     public boolean checkAntwort(String antwort) {
         if (antwort == null || this.wort == null) {
             return false;
