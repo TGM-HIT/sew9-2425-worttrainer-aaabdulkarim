@@ -9,11 +9,14 @@ public class WortPaar {
     private String bildURL;
 
     public WortPaar(String wort, String bildURL) {
-        this.wort = wort;
-        this.bildURL = bildURL;
+        this.wort = (wort != null) ? wort : "";
+        this.bildURL = (bildURL != null) ? bildURL : "";
     }
 
     public boolean checkAntwort(String antwort) {
+        if (antwort == null || this.wort == null) {
+            return false;
+        }
         return this.wort.equalsIgnoreCase(antwort);
     }
 

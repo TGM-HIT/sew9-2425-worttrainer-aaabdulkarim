@@ -13,8 +13,8 @@ public class WortTrainer {
     private int aktuellesIndex;
 
     public WortTrainer(){
-        wortListe = new ArrayList<>();
-        statistikManager = new StatistikManager();
+        setWortListe(new ArrayList<WortPaar>());
+        setStatistikManager(new StatistikManager());
         aktuellesIndex = -1;
 
         // TODO: Überprüfen ob es schon Daten zum Laden gibt, wenn nicht --> vorgefertigte WortTrainer verwenden
@@ -25,8 +25,8 @@ public class WortTrainer {
     }
 
     public WortTrainer(ArrayList<WortPaar> wortListe) {
-        this.wortListe = wortListe;
-        this.statistikManager = new StatistikManager();
+        setWortListe(wortListe);
+        setStatistikManager(new StatistikManager());
 
         // TODO: Überprüfen ob es schon Daten zum Laden gibt, wenn nicht --> vorgefertigte WortTrainer verwenden
         this.wortListe.add(new WortPaar("Gitarre", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Classical_Guitar_two_views.jpg/1024px-Classical_Guitar_two_views.jpg"));
