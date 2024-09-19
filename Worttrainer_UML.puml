@@ -20,7 +20,7 @@ package model {
         - aktuellesIndex : int
 
         + WortTrainer(wortListe : ArrayList<WortPaar>))
-        + nextWort() : void
+        + nextWort() : WortPaar
         + checkAntwort(antwort : String) : boolean
 
         + setWortListe(wortListe : ArrayList<WortPaar>) : void
