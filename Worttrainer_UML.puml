@@ -7,7 +7,9 @@ package model {
         - bildURL : String
         - wort : String
 
+        + WortPaar(jsonData : JSONObject)
         + WortPaar(antwort : String, bildURL: String)
+
         + checkAntwort(antwort : String) : boolean
 
         + getWort() : String
@@ -19,7 +21,9 @@ package model {
         - statistikManager : StatistikManager
         - aktuellesIndex : int
 
+        + WortTrainer(jsonData : JSONObject)
         + WortTrainer(wortListe : ArrayList<WortPaar>))
+
         + nextWort() : WortPaar
         + checkAntwort(antwort : String) : boolean
 
@@ -33,6 +37,12 @@ package model {
         - insgesamt : int
         - anzahlRichtig : int
         - anzahlFalsch : int
+
+        + StatistikManager(jsonData : JSONObject)
+        + StatistikManager(
+        (insgesamt : int),
+        (anzahlRichtig : int),
+        (anzahlFalsch : int))
 
         + addRichtig() : void
         + addFalsch() : void
