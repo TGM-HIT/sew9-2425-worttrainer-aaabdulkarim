@@ -1,7 +1,11 @@
+import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.json.simple.*;
+import org.junit.jupiter.api.DisplayName;
 
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Diese Klasse testet den WortTrainer
@@ -13,6 +17,7 @@ public class WortTrainerTest{
 
     private WortTrainer wt;
     private ArrayList<WortPaar> wortListe;
+    private StatistikManager sm;
 
     @BeforeEach
     public void setup(){
@@ -23,12 +28,18 @@ public class WortTrainerTest{
         this.wortListe.add(new WortPaar("Drache", "https://static.wikia.nocookie.net/drachen/images/5/5e/Bertuch_Drache_Fabelwesen_Bilderbuch_f%C3%BCr_Kinder.jpg/revision/latest?cb=20200526122105&path-prefix=de"));
         this.wortListe.add(new WortPaar("Dose", "https://as1.ftcdn.net/v2/jpg/00/16/96/44/1000_F_16964494_iCMK2strv8ubvfjLB4zvgXJvR196WxO5.jpg"));
 
+        sm = new StatistikManager();
     }
 
+    @Test
+    @DisplayName("Test ob der Konstruktor korrekt JSON Objekte verarbeitet")
     public void testConstructorJSON(){
         JSONObject jsonData = new JSONObject();
+
         jsonData.put("wortListe", wortListe);
-        wt = new WortTrainer();
+        jsonData.put("statistikManager", sm);
+        wt = new WortTrainer(jsonData);
+        assertEquals(wt.getWortListe() , wortListe);
     }
 
 
