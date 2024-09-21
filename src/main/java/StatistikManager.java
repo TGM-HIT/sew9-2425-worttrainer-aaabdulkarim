@@ -1,3 +1,5 @@
+import org.json.simple.JSONObject;
+
 /**
  * Der StatistikManager hält die Informationen zur Statistik und bietet die Funktionalität für die Änderung der Daten
  *
@@ -8,6 +10,12 @@ public class StatistikManager {
     private int insgesamt;
     private int anzahlRichtig;
     private int anzahlFalsch;
+
+    public StatistikManager(JSONObject jsonData){
+        setInsgesamt((int) jsonData.get("insgesamt"));
+        setAnzahlRichtig((int) jsonData.get("anzahlRichtig"));
+        setAnzahlFalsch((int) jsonData.get("anzahlFalsch"));
+    }
 
     /**
      * Anfangs wird alles auf 0 gesetzt

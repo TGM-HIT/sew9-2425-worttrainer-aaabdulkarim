@@ -1,2 +1,11 @@
 apply plugin: 'idea'
 apply plugin: 'java'
+
+repositories {
+    mavenCentral()  // This tells Gradle to use Maven Central for resolving dependencies
+}
+
+dependencies {
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
+}

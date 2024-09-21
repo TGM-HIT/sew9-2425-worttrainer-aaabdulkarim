@@ -7,6 +7,9 @@ package model {
         - bildURL : String
         - wort : String
 
+        - setBildURL(String bildUrl) : void
+        - setWort(String wort) : void
+
         + WortPaar(jsonData : JSONObject)
         + WortPaar(antwort : String, bildURL: String)
 
@@ -14,6 +17,7 @@ package model {
 
         + getWort() : String
         + getBildURL() : String
+
     }
 
     class WortTrainer {
@@ -29,7 +33,7 @@ package model {
 
         + setWortListe(wortListe : ArrayList<WortPaar>) : void
         + setStatistik(statistikManager : StatistikManager) : void
-
+        + setAktuellesIndex(aktuellesIndex : int) : void
         + getAktuellesWort() : WortPaar
     }
 

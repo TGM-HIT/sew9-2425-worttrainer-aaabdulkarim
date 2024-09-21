@@ -1,3 +1,5 @@
+import org.json.simple.JSONObject;
+
 /**
  * Das Rückgrat der gesamten Applikation. Besteht aus einem Wort zugehörig zu der Bild URL
  *
@@ -9,14 +11,20 @@ public class WortPaar {
     private String bildURL;
 
 
+    public WortPaar(JSONObject jsonData){
+        setWort((String) jsonData.get("wort"));
+        setBildURL((String) jsonData.get("bildURL"));
+
+    }
+
     /**
      * Benötigt Wort und Bild URL
      * @param wort String
      * @param bildURL String
      */
     public WortPaar(String wort, String bildURL) {
-        this.wort = (wort != null) ? wort : "";
-        this.bildURL = (bildURL != null) ? bildURL : "";
+        setWort(wort);
+        setBildURL(bildURL);
     }
 
     /**
@@ -37,5 +45,13 @@ public class WortPaar {
 
     public String getBildURL() {
         return bildURL;
+    }
+
+    private void setWort(String wort){
+        this.wort = (wort != null) ? wort : "";
+    }
+
+    private void setBildURL(String bildURL){
+        this.bildURL = (bildURL != null) ? bildURL : "";
     }
 }

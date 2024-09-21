@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+import org.json.*;
+import org.json.simple.JSONObject;
+
 /**
  * Das ist die Hauptklasse des Models
  *
@@ -11,6 +14,12 @@ public class WortTrainer {
     private ArrayList<WortPaar> wortListe;
     private StatistikManager statistikManager;
     private int aktuellesIndex;
+
+    public WortTrainer(JSONObject jsonData){
+        setWortListe((ArrayList<WortPaar>) jsonData.get("wortListe"));
+        setStatistikManager(this.statistikManager = (StatistikManager) jsonData.get("statistikManager"));
+        setAktuellesIndex((int) aktuellesIndex);
+    }
 
     /**
      * Falls keine Dateien gespeichert sind werden vorgefertigte WortPaare genommen
@@ -89,5 +98,9 @@ public class WortTrainer {
         } else {
             throw new IllegalArgumentException("Parameter darf nicht null sein");
         }
+    }
+
+    public void setAktuellesIndex(int aktuellesIndex){
+        this.aktuellesIndex = aktuellesIndex;
     }
 }
