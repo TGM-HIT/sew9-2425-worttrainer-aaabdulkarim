@@ -1,0 +1,35 @@
+import org.junit.jupiter.api.BeforeEach;
+import org.json.simple.*;
+
+import java.util.ArrayList;
+
+/**
+ * Diese Klasse testet den WortTrainer
+ *
+ * @author Amadeus Abdulkarim
+ * @version 21-09-2024
+ */
+public class WortTrainerTest{
+
+    private WortTrainer wt;
+    private ArrayList<WortPaar> wortListe;
+
+    @BeforeEach
+    public void setup(){
+        wt = new WortTrainer();
+        wortListe = new ArrayList<WortPaar>();
+        this.wortListe.add(new WortPaar("Gitarre", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Classical_Guitar_two_views.jpg/1024px-Classical_Guitar_two_views.jpg"));
+        this.wortListe.add(new WortPaar("Pasta", "https://www.simply-v.de/volumes/article/articles/_768x838_crop_center-center_none/lyj5mkoECBye66gL5qULow6NgE05aDGD7yfXooqM.jpeg?v=1720169377"));
+        this.wortListe.add(new WortPaar("Drache", "https://static.wikia.nocookie.net/drachen/images/5/5e/Bertuch_Drache_Fabelwesen_Bilderbuch_f%C3%BCr_Kinder.jpg/revision/latest?cb=20200526122105&path-prefix=de"));
+        this.wortListe.add(new WortPaar("Dose", "https://as1.ftcdn.net/v2/jpg/00/16/96/44/1000_F_16964494_iCMK2strv8ubvfjLB4zvgXJvR196WxO5.jpg"));
+
+    }
+
+    public void testConstructorJSON(){
+        JSONObject jsonData = new JSONObject();
+        jsonData.put("wortListe", wortListe);
+        wt = new WortTrainer();
+    }
+
+
+}
