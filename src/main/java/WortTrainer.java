@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.json.*;
 import org.json.simple.JSONObject;
 
 /**
