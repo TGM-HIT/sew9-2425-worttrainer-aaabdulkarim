@@ -1,7 +1,7 @@
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.json.simple.*;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
+import org.json.simple.JSONObject;
 
 import java.util.ArrayList;
 
@@ -39,7 +39,12 @@ public class WortTrainerTest{
         jsonData.put("wortListe", wortListe);
         jsonData.put("statistikManager", sm);
         wt = new WortTrainer(jsonData);
-        assertEquals(wt.getWortListe() , wortListe);
+        for (int index = 0; index < wortListe.size(); index++) {
+            wt.setAktuellesIndex(index);
+            assertEquals(wortListe.get(index), wt.getAktuellesWort());
+
+        }
+
     }
 
 
