@@ -153,5 +153,23 @@ public class WortTrainerTest{
         assertEquals(anzahlFalsch + 1, sm.getAnzahlFalsch());
     }
 
+    @Test
+    @DisplayName("Test ob der Konstruktor vom StatistikManager korrekt JSON Objekte verarbeitet")
+    public void testConstructorJSONStatistikManager(){
+        JSONObject jsonData = new JSONObject();
+        jsonData.put("insgesamt", 5);
+        jsonData.put("anzahlRichtig", 3);
+        jsonData.put("anzahlFalsch", 2);
+
+        sm = new StatistikManager(jsonData);
+
+        int insgesamt = sm.getInsgesamt();
+        int anzahlFalsch = sm.getAnzahlFalsch();
+        int anzahlRichtig = sm.getAnzahlRichtig();
+
+        assertEquals(5, sm.getInsgesamt());
+        assertEquals(3, sm.getAnzahlRichtig());
+        assertEquals(2, sm.getAnzahlFalsch());
+    }
 
 }
