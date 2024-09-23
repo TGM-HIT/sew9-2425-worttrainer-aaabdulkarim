@@ -1,7 +1,9 @@
+package model;
+
 import org.json.simple.JSONObject;
 
 /**
- * Der StatistikManager hält die Informationen zur Statistik und bietet die Funktionalität für die Änderung der Daten
+ * Der model.StatistikManager hält die Informationen zur Statistik und bietet die Funktionalität für die Änderung der Daten
  *
  * @author Amadeus Abdulkarim
  * @version 18-09-2024

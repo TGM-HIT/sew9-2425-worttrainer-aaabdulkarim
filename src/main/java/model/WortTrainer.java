@@ -1,3 +1,5 @@
+package model;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -28,7 +30,7 @@ public class WortTrainer {
         setStatistikManager(new StatistikManager());
         aktuellesIndex = 0;
 
-        // TODO: Überprüfen ob es schon Daten zum Laden gibt, wenn nicht --> vorgefertigte WortTrainer verwenden
+        // TODO: Überprüfen ob es schon Daten zum Laden gibt, wenn nicht --> vorgefertigte model.WortTrainer verwenden
         this.wortListe.add(new WortPaar("Gitarre", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Classical_Guitar_two_views.jpg/1024px-Classical_Guitar_two_views.jpg"));
         this.wortListe.add(new WortPaar("Pasta", "https://www.simply-v.de/volumes/article/articles/_768x838_crop_center-center_none/lyj5mkoECBye66gL5qULow6NgE05aDGD7yfXooqM.jpeg?v=1720169377"));
         this.wortListe.add(new WortPaar("Drache", "https://static.wikia.nocookie.net/drachen/images/5/5e/Bertuch_Drache_Fabelwesen_Bilderbuch_f%C3%BCr_Kinder.jpg/revision/latest?cb=20200526122105&path-prefix=de"));
@@ -43,7 +45,7 @@ public class WortTrainer {
         setWortListe(wortListe);
         setStatistikManager(new StatistikManager());
 
-        // TODO: Überprüfen ob es schon Daten zum Laden gibt, wenn nicht --> vorgefertigte WortTrainer verwenden
+        // TODO: Überprüfen ob es schon Daten zum Laden gibt, wenn nicht --> vorgefertigte model.WortTrainer verwenden
         this.wortListe.add(new WortPaar("Gitarre", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Classical_Guitar_two_views.jpg/1024px-Classical_Guitar_two_views.jpg"));
         this.wortListe.add(new WortPaar("Pasta", "https://www.simply-v.de/volumes/article/articles/_768x838_crop_center-center_none/lyj5mkoECBye66gL5qULow6NgE05aDGD7yfXooqM.jpeg?v=1720169377"));
         this.wortListe.add(new WortPaar("Drache", "https://static.wikia.nocookie.net/drachen/images/5/5e/Bertuch_Drache_Fabelwesen_Bilderbuch_f%C3%BCr_Kinder.jpg/revision/latest?cb=20200526122105&path-prefix=de"));
@@ -53,7 +55,7 @@ public class WortTrainer {
 
     /**
      * Wählt ein zufälliges Wort aus der Wortliste
-     * @return WortPaar zufällig ausgewählt
+     * @return model.WortPaar zufällig ausgewählt
      */
     public WortPaar nextWort(){
         Random rand = new Random();

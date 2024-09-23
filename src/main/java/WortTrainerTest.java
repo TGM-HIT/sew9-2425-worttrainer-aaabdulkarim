@@ -1,3 +1,6 @@
+import model.StatistikManager;
+import model.WortPaar;
+import model.WortTrainer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -9,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
- * Diese Klasse testet den WortTrainer
+ * Diese Klasse testet den model des WortTrainer
  *
  * @author Amadeus Abdulkarim
  * @version 21-09-2024
@@ -34,7 +37,7 @@ public class WortTrainerTest{
     }
 
     @Test
-    @DisplayName("Test ob der Konstruktor vom WortTrainer korrekt JSON Objekte verarbeitet")
+    @DisplayName("Test ob der Konstruktor vom model.WortTrainer korrekt JSON Objekte verarbeitet")
     public void testConstructorJSONWortTrainer(){
         JSONObject jsonData = new JSONObject();
 
@@ -49,7 +52,7 @@ public class WortTrainerTest{
     }
 
     @Test
-    @DisplayName("Test ob der Konstruktor vom WortPaar korrekt JSON Objekte verarbeitet")
+    @DisplayName("Test ob der Konstruktor vom model.WortPaar korrekt JSON Objekte verarbeitet")
     public void testConstructorJSONWortPaar(){
         JSONObject jsonData = new JSONObject();
         jsonData.put("wort", "Test");
@@ -85,7 +88,7 @@ public class WortTrainerTest{
     }
 
     @Test
-    @DisplayName("Test ob die checkWort Methode von der WortPaar Klasse funktioniert")
+    @DisplayName("Test ob die checkWort Methode von der model.WortPaar Klasse funktioniert")
     public void testCheckWortWortPaar(){
         WortPaar wp = new WortPaar("Test", "TestURL");
         boolean ergebnisErwartetTrue = wp.checkAntwort("Test");
@@ -101,7 +104,7 @@ public class WortTrainerTest{
 
 
     @Test
-    @DisplayName("Test ob die checkWort Methode von der WortTrainer Klasse funktioniert")
+    @DisplayName("Test ob die checkWort Methode von der model.WortTrainer Klasse funktioniert")
     public void testCheckWortWortTrainer(){
         WortPaar wp = wt.getAktuellesWort();
 
@@ -130,7 +133,7 @@ public class WortTrainerTest{
         int anzahlFalsch = sm.getAnzahlFalsch();
         int anzahlRichtig = sm.getAnzahlRichtig();
 
-        wt.setAktuellesIndex(0);        // WortPaar("Gitarre", URL)
+        wt.setAktuellesIndex(0);        // model.WortPaar("Gitarre", URL)
         wt.checkAntwort("Gitarre");  // Richtig wäre "Gitarre"
 
         assertEquals(insgesamt + 1, sm.getInsgesamt());
@@ -145,7 +148,7 @@ public class WortTrainerTest{
         int anzahlFalsch = sm.getAnzahlFalsch();
         int anzahlRichtig = sm.getAnzahlRichtig();
 
-        wt.setAktuellesIndex(0);        // WortPaar("Gitarre", URL)
+        wt.setAktuellesIndex(0);        // model.WortPaar("Gitarre", URL)
         wt.checkAntwort("Falsche Antwort"); // Richtig wäre "Gitarre"
 
         assertEquals(insgesamt + 1, sm.getInsgesamt());
@@ -154,7 +157,7 @@ public class WortTrainerTest{
     }
 
     @Test
-    @DisplayName("Test ob der Konstruktor vom StatistikManager korrekt JSON Objekte verarbeitet")
+    @DisplayName("Test ob der Konstruktor vom model.StatistikManager korrekt JSON Objekte verarbeitet")
     public void testConstructorJSONStatistikManager(){
         JSONObject jsonData = new JSONObject();
         jsonData.put("insgesamt", 5);

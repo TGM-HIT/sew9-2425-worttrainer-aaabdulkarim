@@ -62,13 +62,13 @@ package model {
     }
 
     interface SpeichernLadenStrategie{
-        + speichern() : void
+        + speichern(wortTrainer : WortTrainer) : void
         + laden() : WortTrainer
     }
 
     class SpeichernLadenJson implements SpeichernLadenStrategie{
         - speicherPfad : String
-        + speichern() : void
+        + speichern(wortTrainer : WortTrainer) : void
         + laden() : WortTrainer
     }
 }
