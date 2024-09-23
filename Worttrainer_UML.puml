@@ -60,6 +60,17 @@ package model {
         + setAnzahlFalsch(anzahlFalsch : int) : void
         + setAnzahlRichtig(anzahlRichtig : int) : void
     }
+
+    interface SpeichernLadenStrategie{
+        + speichern() : void
+        + laden() : WortTrainer
+    }
+
+    class SpeichernLadenJson implements SpeichernLadenStrategie{
+        - speicherPfad : String
+        + speichern() : void
+        + laden() : WortTrainer
+    }
 }
 
 
