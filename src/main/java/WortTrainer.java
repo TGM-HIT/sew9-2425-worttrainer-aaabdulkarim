@@ -26,7 +26,7 @@ public class WortTrainer {
     public WortTrainer(){
         setWortListe(new ArrayList<WortPaar>());
         setStatistikManager(new StatistikManager());
-        aktuellesIndex = -1;
+        aktuellesIndex = 0;
 
         // TODO: Überprüfen ob es schon Daten zum Laden gibt, wenn nicht --> vorgefertigte WortTrainer verwenden
         this.wortListe.add(new WortPaar("Gitarre", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Classical_Guitar_two_views.jpg/1024px-Classical_Guitar_two_views.jpg"));
@@ -70,12 +70,12 @@ public class WortTrainer {
      */
     public boolean checkAntwort(String antwort){
         boolean wahrhaftigkeit =  getAktuellesWort().checkAntwort(antwort);
-        nextWort();
         if(wahrhaftigkeit){
             statistikManager.addRichtig();
         } else{
             statistikManager.addFalsch();
         }
+        nextWort();
         return wahrhaftigkeit;
     }
 

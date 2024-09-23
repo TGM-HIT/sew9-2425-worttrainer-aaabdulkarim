@@ -6,6 +6,7 @@ import org.json.simple.JSONObject;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 /**
  * Diese Klasse testet den WortTrainer
@@ -21,7 +22,6 @@ public class WortTrainerTest{
 
     @BeforeEach
     public void setup(){
-        wt = new WortTrainer();
         wortListe = new ArrayList<WortPaar>();
         this.wortListe.add(new WortPaar("Gitarre", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Classical_Guitar_two_views.jpg/1024px-Classical_Guitar_two_views.jpg"));
         this.wortListe.add(new WortPaar("Pasta", "https://www.simply-v.de/volumes/article/articles/_768x838_crop_center-center_none/lyj5mkoECBye66gL5qULow6NgE05aDGD7yfXooqM.jpeg?v=1720169377"));
@@ -29,11 +29,13 @@ public class WortTrainerTest{
         this.wortListe.add(new WortPaar("Dose", "https://as1.ftcdn.net/v2/jpg/00/16/96/44/1000_F_16964494_iCMK2strv8ubvfjLB4zvgXJvR196WxO5.jpg"));
 
         sm = new StatistikManager();
+        wt = new WortTrainer(wortListe);
+
     }
 
     @Test
-    @DisplayName("Test ob der Konstruktor korrekt JSON Objekte verarbeitet")
-    public void testConstructorJSON(){
+    @DisplayName("Test ob der Konstruktor vom WortTrainer korrekt JSON Objekte verarbeitet")
+    public void testConstructorJSONWortTrainer(){
         JSONObject jsonData = new JSONObject();
 
         jsonData.put("wortListe", wortListe);
@@ -42,10 +44,82 @@ public class WortTrainerTest{
         for (int index = 0; index < wortListe.size(); index++) {
             wt.setAktuellesIndex(index);
             assertEquals(wortListe.get(index), wt.getAktuellesWort());
-
         }
 
     }
 
+    @Test
+    @DisplayName("Test ob der Konstruktor vom WortPaar korrekt JSON Objekte verarbeitet")
+    public void testConstructorJSONWortPaar() {
+        JSONObject jsonData = new JSONObject();
+        jsonData.put("wort", "Test");
+        jsonData.put("bildURL", "testURL");
 
+        WortPaar wp = new WortPaar(
+                (String) jsonData.get("wort"),
+                (String) jsonData.get("bildURL")
+        );
+
+        assertEquals(wp.getWort(), "Test");
+        assertEquals(wp.getBildURL(), "testURL");
+
+    }
+
+    @Test
+    @DisplayName("Test ob eine Serie an nextWort Befehlen immer ein anderes zufälliges Ergebnis liefert")
+    /**
+     * In einem sehr unwahrscheinlichen Fall wird dieser Test fehlschlagen
+     */
+    public void testNextWort(){
+        ArrayList<WortPaar> randomWortPaarArr1 = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            randomWortPaarArr1.add(wt.nextWort());
+        }
+
+        ArrayList<WortPaar> randomWortPaarArr2 = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            randomWortPaarArr2.add(wt.nextWort());
+        }
+
+        assertNotEquals(randomWortPaarArr1, randomWortPaarArr2);
+    }
+
+    @Test
+    @DisplayName("Test ob die checkWort Methode von der WortPaar Klasse funktioniert")
+    public void testCheckWortWortPaar() {
+        WortPaar wp = new WortPaar("Test", "TestURL");
+        boolean ergebnisErwartetTrue = wp.checkAntwort("Test");
+        assertEquals(true, ergebnisErwartetTrue);
+
+        // Test ob Rechtschreibung ingoriert wird
+        ergebnisErwartetTrue = wp.checkAntwort("test");
+        assertEquals(true, ergebnisErwartetTrue);
+
+        boolean ergebnisErwartetFalse = wp.checkAntwort("Tst");
+        assertEquals(false, ergebnisErwartetFalse);
+    }
+
+
+    @Test
+    @DisplayName("Test ob die checkWort Methode von der WortTrainer Klasse funktioniert")
+    public void testCheckWortWortTrainer() {
+        WortPaar wp = wt.getAktuellesWort();
+
+        boolean ergebnisErwartetTrue = wt.checkAntwort(wp.getWort());
+        assertEquals(true, ergebnisErwartetTrue);
+
+        wp = wt.getAktuellesWort();
+        // Lower Case Test
+        ergebnisErwartetTrue = wt.checkAntwort(wp.getWort().toLowerCase());
+        assertEquals(true, ergebnisErwartetTrue);
+
+        wp = wt.getAktuellesWort();
+        // Upper Case Test
+        ergebnisErwartetTrue = wt.checkAntwort(wp.getWort().toUpperCase());
+        assertEquals(true, ergebnisErwartetTrue);
+
+
+        boolean ergebnisErwartetFalse = wt.checkAntwort("Tst");
+        assertEquals(false, ergebnisErwartetFalse);
+    }
 }

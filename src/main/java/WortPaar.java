@@ -34,6 +34,7 @@ public class WortPaar {
      */
     public boolean checkAntwort(String antwort) {
         if (antwort == null || this.wort == null) {
+            System.err.println("Antwort oder Wort ist null");
             return false;
         }
         return this.wort.equalsIgnoreCase(antwort);
