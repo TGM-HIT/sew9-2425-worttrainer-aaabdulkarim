@@ -30,7 +30,7 @@ public class WortTrainerTest{
 
         sm = new StatistikManager();
         wt = new WortTrainer(wortListe);
-
+        wt.setStatistikManager(sm);
     }
 
     @Test
@@ -41,7 +41,7 @@ public class WortTrainerTest{
         jsonData.put("wortListe", wortListe);
         jsonData.put("statistikManager", sm);
         wt = new WortTrainer(jsonData);
-        for (int index = 0; index < wortListe.size(); index++) {
+        for(int index = 0; index < wortListe.size(); index++){
             wt.setAktuellesIndex(index);
             assertEquals(wortListe.get(index), wt.getAktuellesWort());
         }
@@ -50,7 +50,7 @@ public class WortTrainerTest{
 
     @Test
     @DisplayName("Test ob der Konstruktor vom WortPaar korrekt JSON Objekte verarbeitet")
-    public void testConstructorJSONWortPaar() {
+    public void testConstructorJSONWortPaar(){
         JSONObject jsonData = new JSONObject();
         jsonData.put("wort", "Test");
         jsonData.put("bildURL", "testURL");
@@ -72,12 +72,12 @@ public class WortTrainerTest{
      */
     public void testNextWort(){
         ArrayList<WortPaar> randomWortPaarArr1 = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for(int i = 0; i < 5; i++){
             randomWortPaarArr1.add(wt.nextWort());
         }
 
         ArrayList<WortPaar> randomWortPaarArr2 = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for(int i = 0; i < 5; i++){
             randomWortPaarArr2.add(wt.nextWort());
         }
 
@@ -86,7 +86,7 @@ public class WortTrainerTest{
 
     @Test
     @DisplayName("Test ob die checkWort Methode von der WortPaar Klasse funktioniert")
-    public void testCheckWortWortPaar() {
+    public void testCheckWortWortPaar(){
         WortPaar wp = new WortPaar("Test", "TestURL");
         boolean ergebnisErwartetTrue = wp.checkAntwort("Test");
         assertEquals(true, ergebnisErwartetTrue);
@@ -102,7 +102,7 @@ public class WortTrainerTest{
 
     @Test
     @DisplayName("Test ob die checkWort Methode von der WortTrainer Klasse funktioniert")
-    public void testCheckWortWortTrainer() {
+    public void testCheckWortWortTrainer(){
         WortPaar wp = wt.getAktuellesWort();
 
         boolean ergebnisErwartetTrue = wt.checkAntwort(wp.getWort());
@@ -122,4 +122,36 @@ public class WortTrainerTest{
         boolean ergebnisErwartetFalse = wt.checkAntwort("Tst");
         assertEquals(false, ergebnisErwartetFalse);
     }
+
+    @Test
+    @DisplayName("Test ob die Statistiken sich nach richtiger Antwort ändern")
+    public void testStatistikManagerFuegHinzuRichtig(){
+        int insgesamt = sm.getInsgesamt();
+        int anzahlFalsch = sm.getAnzahlFalsch();
+        int anzahlRichtig = sm.getAnzahlRichtig();
+
+        wt.setAktuellesIndex(0);        // WortPaar("Gitarre", URL)
+        wt.checkAntwort("Gitarre");  // Richtig wäre "Gitarre"
+
+        assertEquals(insgesamt + 1, sm.getInsgesamt());
+        assertEquals(anzahlRichtig + 1, sm.getAnzahlRichtig());
+        assertEquals(anzahlFalsch, sm.getAnzahlFalsch());
+    }
+
+    @Test
+    @DisplayName("Test ob die Statistiken sich nach falscher Antwort aendern")
+    public void testStatistikManagerFuegHinzuFalsch(){
+        int insgesamt = sm.getInsgesamt();
+        int anzahlFalsch = sm.getAnzahlFalsch();
+        int anzahlRichtig = sm.getAnzahlRichtig();
+
+        wt.setAktuellesIndex(0);        // WortPaar("Gitarre", URL)
+        wt.checkAntwort("Falsche Antwort"); // Richtig wäre "Gitarre"
+
+        assertEquals(insgesamt + 1, sm.getInsgesamt());
+        assertEquals(anzahlRichtig, sm.getAnzahlRichtig());
+        assertEquals(anzahlFalsch + 1, sm.getAnzahlFalsch());
+    }
+
+
 }
