@@ -1,15 +1,15 @@
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import model.StatistikManager;
 import model.WortPaar;
 import model.WortTrainer;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-import org.json.simple.JSONObject;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Diese Klasse testet den model des WortTrainer
@@ -17,15 +17,16 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * @author Amadeus Abdulkarim
  * @version 21-09-2024
  */
-public class WortTrainerTest{
+public class WortTrainerTest {
 
     private WortTrainer wt;
     private ArrayList<WortPaar> wortListe;
     private StatistikManager sm;
+    private Gson gson = new Gson();
 
     @BeforeEach
-    public void setup(){
-        wortListe = new ArrayList<WortPaar>();
+    public void setup() {
+        wortListe = new ArrayList<>();
         this.wortListe.add(new WortPaar("Gitarre", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Classical_Guitar_two_views.jpg/1024px-Classical_Guitar_two_views.jpg"));
         this.wortListe.add(new WortPaar("Pasta", "https://www.simply-v.de/volumes/article/articles/_768x838_crop_center-center_none/lyj5mkoECBye66gL5qULow6NgE05aDGD7yfXooqM.jpeg?v=1720169377"));
         this.wortListe.add(new WortPaar("Drache", "https://static.wikia.nocookie.net/drachen/images/5/5e/Bertuch_Drache_Fabelwesen_Bilderbuch_f%C3%BCr_Kinder.jpg/revision/latest?cb=20200526122105&path-prefix=de"));
@@ -37,50 +38,45 @@ public class WortTrainerTest{
     }
 
     @Test
-    @DisplayName("Test ob der Konstruktor vom model.WortTrainer korrekt JSON Objekte verarbeitet")
-    public void testConstructorJSONWortTrainer(){
-        JSONObject jsonData = new JSONObject();
+    @DisplayName("Test ob der Konstruktor vom WortTrainer korrekt JSON Objekte verarbeitet")
+    public void testConstructorJSONWortTrainer() {
+        JsonObject jsonData = new JsonObject();
+        jsonData.add("wortListe", gson.toJsonTree(wortListe));
+        jsonData.add("statistikManager", gson.toJsonTree(sm));
+        jsonData.addProperty("aktuellesIndex", 0);
 
-        jsonData.put("wortListe", wortListe);
-        jsonData.put("statistikManager", sm);
-        wt = new WortTrainer(jsonData);
-        for(int index = 0; index < wortListe.size(); index++){
+        wt = gson.fromJson(jsonData, WortTrainer.class);
+        for (int index = 0; index < wortListe.size(); index++) {
             wt.setAktuellesIndex(index);
-            assertEquals(wortListe.get(index), wt.getAktuellesWort());
+            // Checkt ob die WortPaar Objekte gleicht sind.
+            // Einmal Objekt von der originellen Liste vs Objekt von der gelesenen Liste
+            assertTrue(wortListe.get(index).equals(wt.getAktuellesWort()));
         }
-
     }
 
     @Test
-    @DisplayName("Test ob der Konstruktor vom model.WortPaar korrekt JSON Objekte verarbeitet")
-    public void testConstructorJSONWortPaar(){
-        JSONObject jsonData = new JSONObject();
-        jsonData.put("wort", "Test");
-        jsonData.put("bildURL", "testURL");
+    @DisplayName("Test ob der Konstruktor vom WortPaar korrekt JSON Objekte verarbeitet")
+    public void testConstructorJSONWortPaar() {
+        JsonObject jsonData = new JsonObject();
+        jsonData.addProperty("wort", "Test");
+        jsonData.addProperty("bildURL", "testURL");
 
-        WortPaar wp = new WortPaar(
-                (String) jsonData.get("wort"),
-                (String) jsonData.get("bildURL")
-        );
+        WortPaar wp = gson.fromJson(jsonData, WortPaar.class);
 
-        assertEquals(wp.getWort(), "Test");
-        assertEquals(wp.getBildURL(), "testURL");
-
+        assertEquals("Test", wp.getWort());
+        assertEquals("testURL", wp.getBildURL());
     }
 
     @Test
     @DisplayName("Test ob eine Serie an nextWort Befehlen immer ein anderes zufälliges Ergebnis liefert")
-    /**
-     * In einem sehr unwahrscheinlichen Fall wird dieser Test fehlschlagen
-     */
-    public void testNextWort(){
+    public void testNextWort() {
         ArrayList<WortPaar> randomWortPaarArr1 = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             randomWortPaarArr1.add(wt.nextWort());
         }
 
         ArrayList<WortPaar> randomWortPaarArr2 = new ArrayList<>();
-        for(int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             randomWortPaarArr2.add(wt.nextWort());
         }
 
@@ -88,13 +84,13 @@ public class WortTrainerTest{
     }
 
     @Test
-    @DisplayName("Test ob die checkWort Methode von der model.WortPaar Klasse funktioniert")
-    public void testCheckWortWortPaar(){
+    @DisplayName("Test ob die checkWort Methode von der WortPaar Klasse funktioniert")
+    public void testCheckWortWortPaar() {
         WortPaar wp = new WortPaar("Test", "TestURL");
         boolean ergebnisErwartetTrue = wp.checkAntwort("Test");
         assertEquals(true, ergebnisErwartetTrue);
 
-        // Test ob Rechtschreibung ingoriert wird
+        // Test ob Rechtschreibung ignoriert wird
         ergebnisErwartetTrue = wp.checkAntwort("test");
         assertEquals(true, ergebnisErwartetTrue);
 
@@ -102,10 +98,9 @@ public class WortTrainerTest{
         assertEquals(false, ergebnisErwartetFalse);
     }
 
-
     @Test
-    @DisplayName("Test ob die checkWort Methode von der model.WortTrainer Klasse funktioniert")
-    public void testCheckWortWortTrainer(){
+    @DisplayName("Test ob die checkWort Methode von der WortTrainer Klasse funktioniert")
+    public void testCheckWortWortTrainer() {
         WortPaar wp = wt.getAktuellesWort();
 
         boolean ergebnisErwartetTrue = wt.checkAntwort(wp.getWort());
@@ -121,19 +116,18 @@ public class WortTrainerTest{
         ergebnisErwartetTrue = wt.checkAntwort(wp.getWort().toUpperCase());
         assertEquals(true, ergebnisErwartetTrue);
 
-
         boolean ergebnisErwartetFalse = wt.checkAntwort("Tst");
         assertEquals(false, ergebnisErwartetFalse);
     }
 
     @Test
     @DisplayName("Test ob die Statistiken sich nach richtiger Antwort ändern")
-    public void testStatistikManagerFuegHinzuRichtig(){
+    public void testStatistikManagerFuegHinzuRichtig() {
         int insgesamt = sm.getInsgesamt();
         int anzahlFalsch = sm.getAnzahlFalsch();
         int anzahlRichtig = sm.getAnzahlRichtig();
 
-        wt.setAktuellesIndex(0);        // model.WortPaar("Gitarre", URL)
+        wt.setAktuellesIndex(0);        // WortPaar("Gitarre", URL)
         wt.checkAntwort("Gitarre");  // Richtig wäre "Gitarre"
 
         assertEquals(insgesamt + 1, sm.getInsgesamt());
@@ -142,13 +136,13 @@ public class WortTrainerTest{
     }
 
     @Test
-    @DisplayName("Test ob die Statistiken sich nach falscher Antwort aendern")
-    public void testStatistikManagerFuegHinzuFalsch(){
+    @DisplayName("Test ob die Statistiken sich nach falscher Antwort ändern")
+    public void testStatistikManagerFuegHinzuFalsch() {
         int insgesamt = sm.getInsgesamt();
         int anzahlFalsch = sm.getAnzahlFalsch();
         int anzahlRichtig = sm.getAnzahlRichtig();
 
-        wt.setAktuellesIndex(0);        // model.WortPaar("Gitarre", URL)
+        wt.setAktuellesIndex(0);        // WortPaar("Gitarre", URL)
         wt.checkAntwort("Falsche Antwort"); // Richtig wäre "Gitarre"
 
         assertEquals(insgesamt + 1, sm.getInsgesamt());
@@ -157,22 +151,19 @@ public class WortTrainerTest{
     }
 
     @Test
-    @DisplayName("Test ob der Konstruktor vom model.StatistikManager korrekt JSON Objekte verarbeitet")
-    public void testConstructorJSONStatistikManager(){
-        JSONObject jsonData = new JSONObject();
-        jsonData.put("insgesamt", 5);
-        jsonData.put("anzahlRichtig", 3);
-        jsonData.put("anzahlFalsch", 2);
+    @DisplayName("Test ob der Konstruktor vom StatistikManager korrekt JSON Objekte verarbeitet")
+    public void testConstructorJSONStatistikManager() {
+        // Create JSON data for StatistikManager
+        JsonObject jsonData = new JsonObject();
+        jsonData.addProperty("insgesamt", 5);
+        jsonData.addProperty("anzahlRichtig", 3);
+        jsonData.addProperty("anzahlFalsch", 2);
 
-        sm = new StatistikManager(jsonData);
-
-        int insgesamt = sm.getInsgesamt();
-        int anzahlFalsch = sm.getAnzahlFalsch();
-        int anzahlRichtig = sm.getAnzahlRichtig();
+        // Deserialize to StatistikManager
+        sm = gson.fromJson(jsonData, StatistikManager.class);
 
         assertEquals(5, sm.getInsgesamt());
         assertEquals(3, sm.getAnzahlRichtig());
         assertEquals(2, sm.getAnzahlFalsch());
     }
-
 }

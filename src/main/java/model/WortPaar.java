@@ -3,6 +3,8 @@ package model;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.util.Objects;
+
 /**
  * Das Rückgrat der gesamten Applikation. Besteht aus einem Wort zugehörig zu der Bild URL
  *
@@ -62,4 +64,13 @@ public class WortPaar {
     private void setBildURL(String bildURL){
         this.bildURL = (bildURL != null) ? bildURL : "";
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        WortPaar wortPaar = (WortPaar) o;
+        return Objects.equals(wort, wortPaar.wort) && Objects.equals(bildURL, wortPaar.bildURL);
+    }
+
 }

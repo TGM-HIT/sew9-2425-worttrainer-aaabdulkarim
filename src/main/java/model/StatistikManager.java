@@ -3,6 +3,8 @@ package model;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import java.util.Objects;
+
 /**
  * Der model.StatistikManager hält die Informationen zur Statistik und bietet die Funktionalität für die Änderung der Daten
  *
@@ -88,4 +90,13 @@ public class StatistikManager {
 
         return sb.toString();
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        StatistikManager that = (StatistikManager) o;
+        return insgesamt == that.insgesamt && anzahlRichtig == that.anzahlRichtig && anzahlFalsch == that.anzahlFalsch;
+    }
+
 }

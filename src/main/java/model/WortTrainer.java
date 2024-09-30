@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 import com.google.gson.Gson;
@@ -17,8 +18,6 @@ public class WortTrainer {
     private ArrayList<WortPaar> wortListe;
     private StatistikManager statistikManager;
     private int aktuellesIndex;
-
-    // Constructor to initialize from a JSON string using GSON
     public WortTrainer(String jsonData) {
         Gson gson = new Gson();
 
@@ -37,7 +36,6 @@ public class WortTrainer {
         setStatistikManager(new StatistikManager());
         aktuellesIndex = 0;
 
-        // Add default WortPaar objects
         this.wortListe.add(new WortPaar("Gitarre", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Classical_Guitar_two_views.jpg/1024px-Classical_Guitar_two_views.jpg"));
         this.wortListe.add(new WortPaar("Pasta", "https://www.simply-v.de/volumes/article/articles/_768x838_crop_center-center_none/lyj5mkoECBye66gL5qULow6NgE05aDGD7yfXooqM.jpeg?v=1720169377"));
         this.wortListe.add(new WortPaar("Drache", "https://static.wikia.nocookie.net/drachen/images/5/5e/Bertuch_Drache_Fabelwesen_Bilderbuch_f%C3%BCr_Kinder.jpg/revision/latest?cb=20200526122105&path-prefix=de"));
@@ -121,4 +119,13 @@ public class WortTrainer {
     public int getAktuellesIndex() {
         return aktuellesIndex;
     }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        WortTrainer that = (WortTrainer) o;
+        return aktuellesIndex == that.aktuellesIndex && Objects.equals(wortListe, that.wortListe) && Objects.equals(statistikManager, that.statistikManager);
+    }
+
 }

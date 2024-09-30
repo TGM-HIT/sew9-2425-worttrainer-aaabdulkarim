@@ -60,11 +60,11 @@ public class PersistenzTest{
 
     @Test
     @DisplayName("Test, ob nach dem Speichern ein WortTrainer als JSON String zu sehen ist")
-    public void testCheckFileContentAfterSave() throws IOException, IllegalAccessException{
+    public void testCheckFileContentAfterSave() throws IOException{
         persistenceManager.speichern(this.wt);
         WortTrainer loadedWortTrainer = persistenceManager.laden();
 
-        assertEquals(loadedWortTrainer.toString(), this.wt.toString());
+        assertTrue(loadedWortTrainer.equals(this.wt));
     }
 
 
