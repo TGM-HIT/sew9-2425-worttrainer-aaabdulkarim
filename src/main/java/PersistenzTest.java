@@ -50,11 +50,11 @@ public class PersistenzTest {
     @Test
     @DisplayName("Test, ob eine JSON File beim angegebenen Dateipfad vorhanden ist")
     public void testSaveWTasJSON() throws IOException {
-        String savePath = "/home/amadeus/IdeaProjects/sew9-2425-worttrainer-aaabdulkarim/saves/test.json";
+        String savePath = "saves/test.json";
         FileWriter fw = new FileWriter(savePath);
         fw.write("Test");
 
-        assertThrows(FileNotFoundException.class, () -> {
+        assertDoesNotThrow(() -> {
             new FileReader(savePath);
         });
     }

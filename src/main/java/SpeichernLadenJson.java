@@ -17,7 +17,7 @@ public class SpeichernLadenJson implements SpeichernLadenStrategie {
     }
 
     public SpeichernLadenJson() {
-        String absStandardPfad = "/home/amadeus/IdeaProjects/sew9-2425-worttrainer-aaabdulkarim/saves/file.json";
+        String absStandardPfad = "saves/standard.json";
         this.setSpeicherPfad(absStandardPfad);
     }
 
@@ -52,7 +52,7 @@ public class SpeichernLadenJson implements SpeichernLadenStrategie {
     }
 
     public void setSpeicherPfad(String pfad) {
-        String absStandardPfad = "/home/amadeus/IdeaProjects/sew9-2425-worttrainer-aaabdulkarim/saves/file.json";
+        String absStandardPfad = "saves/standard.json";
         this.speicherPfad = (speicherPfad != null) ? speicherPfad : absStandardPfad;
     }
 }
