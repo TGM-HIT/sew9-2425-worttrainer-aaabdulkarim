@@ -82,19 +82,44 @@ package model {
 
 
 package view {
-    class ViewClass {
+    class FrameWortTrainer{
+        + {static} main (args: String[]) : void
+    }
+
+    class ViewWortTrainer {
+        - insgLabel : JLabel
+        - richtLabel : JLabel
+        - falschLabel : JLabel
+        - userTextFeld : JTextField
+        + ViewWortTrainer()
+        + setStatistik(sm : StatistikManager) : void
+        + setBildURL(bildURL : String) : void
+        + reset() : void
     }
 }
 
 package controller {
-    class ControllClass {
+    class ControlWortTrainer implements ActionListener{
+        - model : WortTrainer
+        - view : ViewWortTrainer
+        - speicherStrategie : SpeichernLadenStrategie
+
+        + ControlWortTrainer()
+        + actionPerformed(e : ActionCommand)
+
+        + setSpeicherPfad(pfad : String) : void
+        
     }
 }
 
 
-
-
 WortTrainer "1" -> "0..*" WortPaar
 WortTrainer -> "1" StatistikManager
+
+/' MVC Struktur'/
+ControlWortTrainer -> WortTrainer
+ControlWortTrainer -> ViewWortTrainer
+ControlWortTrainer -> SpeichernLadenStrategie
+
 
 @enduml

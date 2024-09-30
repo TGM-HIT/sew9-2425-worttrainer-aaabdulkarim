@@ -59,7 +59,7 @@ public class PersistenzTest{
     }
 
     @Test
-    @DisplayName("Test, ob nach dem Speichern ein WortTrainer als JSON String zu sehen ist")
+    @DisplayName("Test, ob nach dem Speichern ein WortTrainer als JSON String zu sehen ist und ob es gleich ist")
     public void testCheckFileContentAfterSave() throws IOException{
         persistenceManager.speichern(this.wt);
         WortTrainer loadedWortTrainer = persistenceManager.laden();
