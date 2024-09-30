@@ -34,7 +34,11 @@ package model {
         + setWortListe(wortListe : ArrayList<WortPaar>) : void
         + setStatistik(statistikManager : StatistikManager) : void
         + setAktuellesIndex(aktuellesIndex : int) : void
+
         + getAktuellesWort() : WortPaar
+        + getWortListe() : ArrayList<WortPaar>()
+        + getStatistikManager() : StatistikManager
+
     }
 
     class StatistikManager {

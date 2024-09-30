@@ -104,4 +104,16 @@ public class WortTrainer {
     public void setAktuellesIndex(int aktuellesIndex){
         this.aktuellesIndex = aktuellesIndex;
     }
+
+    public ArrayList<WortPaar> getWortListe() {
+        return wortListe;
+    }
+
+    public StatistikManager getStatistikManager() {
+        return statistikManager;
+    }
+
+    public int getAktuellesIndex() {
+        return aktuellesIndex;
+    }
 }

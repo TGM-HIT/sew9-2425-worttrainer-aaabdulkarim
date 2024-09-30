@@ -1,5 +1,7 @@
 import model.WortTrainer;
 
+import java.io.IOException;
+
 /**
  * Strategy Pattern ermöglicht mehrere Persistenz Alternativen
  *
@@ -11,13 +13,13 @@ public interface SpeichernLadenStrategie{
     /**
      * Diese Methode speichert den WortTrainer.
      */
-    public void speichern(WortTrainer wt);
+    public void speichern(WortTrainer wt) throws IOException;
 
 
     /**
      * Diese Methode ladet den WortTrainer und gibt diesen zurück
      * @return WortTrainer
      */
-    public WortTrainer laden();
+    public WortTrainer laden() throws IOException;
 
 }
