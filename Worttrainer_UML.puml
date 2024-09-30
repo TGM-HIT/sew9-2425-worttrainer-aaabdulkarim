@@ -74,6 +74,7 @@ package model {
         - speicherPfad : String
         + speichern(wortTrainer : WortTrainer) : void
         + laden() : WortTrainer
+        + setSpeicherPfad(pfad : String) : void
     }
 }
 

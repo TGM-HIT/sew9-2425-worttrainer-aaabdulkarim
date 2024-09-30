@@ -8,10 +8,21 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class SpeichernLadenJson implements SpeichernLadenStrategie{
-    private String savePath;
+public class SpeichernLadenJson implements SpeichernLadenStrategie {
+    private String speicherPfad;
+
+
+    public SpeichernLadenJson(String speicherPfad) {
+        this.setSpeicherPfad(speicherPfad);
+    }
+
+    public SpeichernLadenJson() {
+        String absStandardPfad = "/home/amadeus/IdeaProjects/sew9-2425-worttrainer-aaabdulkarim/saves";
+        this.setSpeicherPfad(absStandardPfad);
+    }
 
     @Override
+
     public void speichern(WortTrainer wt) throws IOException {
         JSONObject jsonData = new JSONObject();
 
@@ -19,15 +30,15 @@ public class SpeichernLadenJson implements SpeichernLadenStrategie{
         jsonData.put("statistikManager", wt.getStatistikManager());
         jsonData.put("wortListe", wt.getWortListe());
 
-        FileWriter file = new FileWriter(savePath);
+        FileWriter file = new FileWriter(speicherPfad);
         file.write(jsonData.toJSONString());
 
     }
 
     @Override
-    public WortTrainer laden() throws IOException{
+    public WortTrainer laden() throws IOException {
         Object object = new WortTrainer();
-        try (FileReader fr = new FileReader(this.savePath)){
+        try (FileReader fr = new FileReader(this.speicherPfad)) {
             JSONParser jsonParser = new JSONParser();
             object = jsonParser.parse(fr);
 
@@ -38,6 +49,10 @@ public class SpeichernLadenJson implements SpeichernLadenStrategie{
         }
 
         return (WortTrainer) object;
+    }
 
+    public void setSpeicherPfad(String pfad) {
+        String absStandardPfad = "/home/amadeus/IdeaProjects/sew9-2425-worttrainer-aaabdulkarim/saves";
+        this.speicherPfad = (speicherPfad != null) ? speicherPfad : absStandardPfad;
     }
 }
