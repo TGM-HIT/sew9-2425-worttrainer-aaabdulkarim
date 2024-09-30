@@ -1,5 +1,6 @@
 import model.WortPaar;
 import model.WortTrainer;
+import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,13 +10,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 
-public class PersistenzTest {
+public class PersistenzTest{
 
     private WortTrainer wt;
     private SpeichernLadenJson persistenceManager;
@@ -32,14 +33,13 @@ public class PersistenzTest {
 
 
         wt = new WortTrainer(wortListe);
-
         persistenceManager = new SpeichernLadenJson();
 
     }
 
     @Test
     @DisplayName("Test, ob eine JSON File gespeichert wird, ohne dass eine Exception geworfen wird")
-    public void testSaveWTasJSONthrowsException() throws IOException {
+    public void testSaveWTasJSONthrowsException() throws IOException{
 
         assertDoesNotThrow(() -> {
             persistenceManager.speichern(this.wt);
@@ -49,13 +49,25 @@ public class PersistenzTest {
 
     @Test
     @DisplayName("Test, ob eine JSON File beim angegebenen Dateipfad vorhanden ist")
-    public void testSaveWTasJSON() throws IOException {
-        String savePath = "saves/test.json";
-        FileWriter fw = new FileWriter(savePath);
-        fw.write("Test");
+    public void testSaveWTasJSON() throws IOException{
 
         assertDoesNotThrow(() -> {
+            String savePath = "saves/test.json";
+            FileWriter fw = new FileWriter(savePath);
             new FileReader(savePath);
         });
     }
+
+    @Test
+    @DisplayName("Test, ob nach dem Speichern ein WortTrainer als JSON String zu sehen ist")
+    public void testCheckFileContentAfterSave() throws IOException, IllegalAccessException{
+        persistenceManager.speichern(this.wt);
+        WortTrainer loadedWortTrainer = persistenceManager.laden();
+
+        assertEquals(loadedWortTrainer.toString(), this.wt.toString());
+    }
+
+
+
+
 }

@@ -75,6 +75,8 @@ package model {
         + speichern(wortTrainer : WortTrainer) : void
         + laden() : WortTrainer
         + setSpeicherPfad(pfad : String) : void
+        + {static} convertToJSON(obj: Object) : JSONObject
+        + {static} isPrimitiveOrWrapper(value: Object) : boolean
     }
 }
 
