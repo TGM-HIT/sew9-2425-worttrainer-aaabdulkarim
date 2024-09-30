@@ -1,6 +1,7 @@
 package model;
 
-import org.json.simple.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 /**
  * Der model.StatistikManager hält die Informationen zur Statistik und bietet die Funktionalität für die Änderung der Daten
@@ -13,10 +14,14 @@ public class StatistikManager {
     private int anzahlRichtig;
     private int anzahlFalsch;
 
-    public StatistikManager(JSONObject jsonData){
-        setInsgesamt((int) jsonData.get("insgesamt"));
-        setAnzahlRichtig((int) jsonData.get("anzahlRichtig"));
-        setAnzahlFalsch((int) jsonData.get("anzahlFalsch"));
+    public StatistikManager(JsonObject jsonData){
+        Gson gson = new Gson();
+
+        StatistikManager deserialized = gson.fromJson(jsonData, StatistikManager.class);
+
+        setInsgesamt(deserialized.getInsgesamt());
+        setAnzahlRichtig(deserialized.getAnzahlRichtig());
+        setAnzahlFalsch(deserialized.getAnzahlFalsch());
     }
 
     /**

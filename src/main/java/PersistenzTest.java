@@ -1,6 +1,6 @@
 import model.WortPaar;
 import model.WortTrainer;
-import org.json.simple.JSONObject;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;

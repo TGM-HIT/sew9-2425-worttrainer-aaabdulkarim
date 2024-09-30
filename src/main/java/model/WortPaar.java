@@ -1,6 +1,7 @@
 package model;
 
-import org.json.simple.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 /**
  * Das Rückgrat der gesamten Applikation. Besteht aus einem Wort zugehörig zu der Bild URL
@@ -13,9 +14,13 @@ public class WortPaar {
     private String bildURL;
 
 
-    public WortPaar(JSONObject jsonData){
-        setWort((String) jsonData.get("wort"));
-        setBildURL((String) jsonData.get("bildURL"));
+    public WortPaar(JsonObject jsonData){
+        Gson gson = new Gson();
+
+        WortPaar deserialized = gson.fromJson(jsonData, WortPaar.class);
+
+        setWort(deserialized.getWort());
+        setBildURL(deserialized.getBildURL());
 
     }
 

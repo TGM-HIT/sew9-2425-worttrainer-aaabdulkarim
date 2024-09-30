@@ -13,7 +13,7 @@ public interface SpeichernLadenStrategie{
     /**
      * Diese Methode speichert den WortTrainer.
      */
-    public void speichern(WortTrainer wt) throws IOException, IllegalAccessException;
+    public void speichern(WortTrainer wt) throws IOException;
 
 
     /**

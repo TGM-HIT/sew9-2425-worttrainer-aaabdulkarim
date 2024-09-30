@@ -3,7 +3,9 @@ package model;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.json.simple.JSONObject;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 
 /**
  * Das ist die Hauptklasse des Models
@@ -16,21 +18,26 @@ public class WortTrainer {
     private StatistikManager statistikManager;
     private int aktuellesIndex;
 
-    public WortTrainer(JSONObject jsonData){
-        setWortListe((ArrayList<WortPaar>) jsonData.get("wortListe"));
-        setStatistikManager(this.statistikManager = (StatistikManager) jsonData.get("statistikManager"));
-        setAktuellesIndex((int) aktuellesIndex);
+    // Constructor to initialize from a JSON string using GSON
+    public WortTrainer(String jsonData) {
+        Gson gson = new Gson();
+
+        WortTrainer deserialized = gson.fromJson(jsonData, WortTrainer.class);
+
+        this.wortListe = deserialized.getWortListe();
+        this.statistikManager = deserialized.getStatistikManager();
+        this.aktuellesIndex = deserialized.getAktuellesIndex();
     }
 
     /**
      * Falls keine Dateien gespeichert sind werden vorgefertigte WortPaare genommen
      */
-    public WortTrainer(){
-        setWortListe(new ArrayList<WortPaar>());
+    public WortTrainer() {
+        setWortListe(new ArrayList<>());
         setStatistikManager(new StatistikManager());
         aktuellesIndex = 0;
 
-        // TODO: Überprüfen ob es schon Daten zum Laden gibt, wenn nicht --> vorgefertigte model.WortTrainer verwenden
+        // Add default WortPaar objects
         this.wortListe.add(new WortPaar("Gitarre", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Classical_Guitar_two_views.jpg/1024px-Classical_Guitar_two_views.jpg"));
         this.wortListe.add(new WortPaar("Pasta", "https://www.simply-v.de/volumes/article/articles/_768x838_crop_center-center_none/lyj5mkoECBye66gL5qULow6NgE05aDGD7yfXooqM.jpeg?v=1720169377"));
         this.wortListe.add(new WortPaar("Drache", "https://static.wikia.nocookie.net/drachen/images/5/5e/Bertuch_Drache_Fabelwesen_Bilderbuch_f%C3%BCr_Kinder.jpg/revision/latest?cb=20200526122105&path-prefix=de"));
@@ -45,23 +52,21 @@ public class WortTrainer {
         setWortListe(wortListe);
         setStatistikManager(new StatistikManager());
 
-        // TODO: Überprüfen ob es schon Daten zum Laden gibt, wenn nicht --> vorgefertigte model.WortTrainer verwenden
+        // Add default WortPaar objects
         this.wortListe.add(new WortPaar("Gitarre", "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Classical_Guitar_two_views.jpg/1024px-Classical_Guitar_two_views.jpg"));
         this.wortListe.add(new WortPaar("Pasta", "https://www.simply-v.de/volumes/article/articles/_768x838_crop_center-center_none/lyj5mkoECBye66gL5qULow6NgE05aDGD7yfXooqM.jpeg?v=1720169377"));
         this.wortListe.add(new WortPaar("Drache", "https://static.wikia.nocookie.net/drachen/images/5/5e/Bertuch_Drache_Fabelwesen_Bilderbuch_f%C3%BCr_Kinder.jpg/revision/latest?cb=20200526122105&path-prefix=de"));
         this.wortListe.add(new WortPaar("Dose", "https://as1.ftcdn.net/v2/jpg/00/16/96/44/1000_F_16964494_iCMK2strv8ubvfjLB4zvgXJvR196WxO5.jpg"));
-
     }
 
     /**
      * Wählt ein zufälliges Wort aus der Wortliste
      * @return model.WortPaar zufällig ausgewählt
      */
-    public WortPaar nextWort(){
+    public WortPaar nextWort() {
         Random rand = new Random();
 
-        int zufälligeZahl = rand.nextInt(wortListe.size());
-        this.aktuellesIndex = zufälligeZahl;
+        this.aktuellesIndex = rand.nextInt(wortListe.size());
         return getAktuellesWort();
     }
 
@@ -70,11 +75,11 @@ public class WortTrainer {
      * @param antwort String Antwort des User
      * @return boolean
      */
-    public boolean checkAntwort(String antwort){
-        boolean wahrhaftigkeit =  getAktuellesWort().checkAntwort(antwort);
-        if(wahrhaftigkeit){
+    public boolean checkAntwort(String antwort) {
+        boolean wahrhaftigkeit = getAktuellesWort().checkAntwort(antwort);
+        if (wahrhaftigkeit) {
             statistikManager.addRichtig();
-        } else{
+        } else {
             statistikManager.addFalsch();
         }
         nextWort();
@@ -86,7 +91,7 @@ public class WortTrainer {
     }
 
     public void setWortListe(ArrayList<WortPaar> wortListe) {
-        if(wortListe != null){
+        if (wortListe != null) {
             this.wortListe = wortListe;
         } else {
             throw new IllegalArgumentException("Parameter darf nicht null sein");
@@ -94,14 +99,14 @@ public class WortTrainer {
     }
 
     public void setStatistikManager(StatistikManager sm) {
-        if(sm != null){
+        if (sm != null) {
             this.statistikManager = sm;
         } else {
             throw new IllegalArgumentException("Parameter darf nicht null sein");
         }
     }
 
-    public void setAktuellesIndex(int aktuellesIndex){
+    public void setAktuellesIndex(int aktuellesIndex) {
         this.aktuellesIndex = aktuellesIndex;
     }
 
