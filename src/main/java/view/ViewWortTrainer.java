@@ -1,25 +1,40 @@
 package view;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.net.URL;
 
 public class ViewWortTrainer extends JFrame{
+
+    private JLabel richtig = new JLabel();
+    private JLabel falsch = new JLabel();
+    private JLabel insgesamt = new JLabel();
+
+    private ImageIcon imageIcon = new ImageIcon();
+
+    private JButton speicherButton = new JButton();
+    private JButton ladeButton = new JButton();
+
 
     public ViewWortTrainer() {
         setTitle("Wort Trainer");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // Look and Feel
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 System.out.println(info.getName() + " - " + info.getClassName());
             }
 
-            // Set a specific Look and Feel (e.g., Nimbus)
             UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
         } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException |
                  IllegalAccessException e) {
             e.printStackTrace();
         }
+
+        this.add(statistikPanel());
 
 
 
@@ -27,8 +42,61 @@ public class ViewWortTrainer extends JFrame{
 
     }
 
+
+    /**
+     * Das ist ein JPanel für die Statistikanzeige
+     *
+     * @return JPanel
+     */
     public JPanel statistikPanel(){
-        this.
+        JPanel statistikPanel = new JPanel();
+
+        richtig.setText("+");
+        insgesamt.setText("");
+        falsch.setText("-");
+
+        richtig.setBackground(Color.green);
+        falsch.setBackground(Color.red);
+
+        statistikPanel.add(richtig);
+        statistikPanel.add(insgesamt);
+        statistikPanel.add(falsch);
+
+        return statistikPanel;
     }
+
+    /**
+     * Das ist ein JPanel für die mittlere Anzeige, dabei sieht man das Image basierend auf einer BildURL
+     * und ein Button für das nächste WortPaar
+     * @return JPanel
+     */
+    public JPanel midPanel(){
+        JPanel midPanel = new JPanel();
+
+        try {
+            JLabel imageLabel = new JLabel(imageIcon);
+
+            midPanel.add(imageLabel);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return midPanel;
+    }
+
+
+    /**
+     * Das ist ein JPanel für die Optionen bzw. Einstellungen. Man kann Speichern und Laden.
+     * @return
+     */
+    public JPanel optionsPanel(){
+        JPanel optionsPanel = new JPanel();
+        optionsPanel.add(this.speicherButton);
+        optionsPanel.add(this.ladeButton);
+
+        return optionsPanel;
+    }
+
+
 
 }
