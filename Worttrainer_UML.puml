@@ -92,6 +92,11 @@ package view {
         - falschLabel : JLabel
         - userTextFeld : JTextField
         + ViewWortTrainer()
+
+        + statistikPanel() : JPanel
+        + midPanel() : JPanel
+        + optionsPanel() : JPanel
+
         + setStatistik(sm : StatistikManager) : void
         + setBildURL(bildURL : String) : void
         + reset() : void
