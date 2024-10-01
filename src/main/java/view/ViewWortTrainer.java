@@ -12,18 +12,22 @@ public class ViewWortTrainer extends JFrame{
 
     private JLabel richtig = new JLabel("+");
     private JLabel falsch = new JLabel("-");
-    private JLabel insgesamt = new JLabel();
+    private JLabel insgesamt = new JLabel("");
 
     private ImageIcon imageIcon = new ImageIcon();
 
-    private JButton speicherButton = new JButton();
-    private JButton ladeButton = new JButton();
+    private JButton nextButton = new JButton("Naechstes Wort");
+
+    private JButton speicherButton = new JButton("Speichern");
+    private JButton ladeButton = new JButton("Laden");
 
 
     public ViewWortTrainer() {
         setTitle("Wort Trainer");
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        BorderLayout borderLayout = new BorderLayout();
+        setLayout(borderLayout);
 
         // Look and Feel
         try {
@@ -37,13 +41,18 @@ public class ViewWortTrainer extends JFrame{
             e.printStackTrace();
         }
 
-        this.add(statistikPanel());
 
+        this.add(statistikPanel(), BorderLayout.PAGE_START);
+        this.add(midPanel(), BorderLayout.CENTER);
+        this.add(nextButton, BorderLayout.LINE_END);
+        this.add(optionsPanel(), BorderLayout.PAGE_END);
 
 
         setVisible(true);
 
     }
+
+
 
 
     /**
@@ -58,8 +67,8 @@ public class ViewWortTrainer extends JFrame{
         insgesamt.setText("");
         falsch.setText("-");
 
-        richtig.setBackground(Color.green);
-        falsch.setBackground(Color.red);
+//        richtig.setBackground(Color.green);
+//        falsch.setBackground(Color.red);
 
         statistikPanel.add(richtig);
         statistikPanel.add(insgesamt);
@@ -68,9 +77,11 @@ public class ViewWortTrainer extends JFrame{
         return statistikPanel;
     }
 
+
     /**
      * Das ist ein JPanel für die mittlere Anzeige, dabei sieht man das Image basierend auf einer BildURL
      * und ein Button für das nächste WortPaar
+     *
      * @return JPanel
      */
     public JPanel midPanel(){
@@ -90,7 +101,8 @@ public class ViewWortTrainer extends JFrame{
 
     /**
      * Das ist ein JPanel für die Optionen bzw. Einstellungen. Man kann Speichern und Laden.
-     * @return
+     *
+     * @return JPanel
      */
     public JPanel optionsPanel(){
         JPanel optionsPanel = new JPanel();
@@ -132,8 +144,8 @@ public class ViewWortTrainer extends JFrame{
 
         imageIcon = new ImageIcon();
 
-        speicherButton = new JButton();
-        ladeButton = new JButton();
+        speicherButton = new JButton("Speichern");
+        ladeButton = new JButton("Laden");
     }
 
 
