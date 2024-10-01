@@ -1,3 +1,5 @@
+package persistance;
+
 import model.WortTrainer;
 
 import java.io.IOException;
