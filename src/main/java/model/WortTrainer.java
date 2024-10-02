@@ -84,10 +84,20 @@ public class WortTrainer {
         return wahrhaftigkeit;
     }
 
+    /**
+     * Gibt das aktuelle Wort zurück
+     * @return WortPaar
+     */
     public WortPaar getAktuellesWort() {
         return wortListe.get(this.aktuellesIndex);
     }
 
+    /**
+     * Setzt die Wortliste für den WortTrainer.
+     *
+     * @param wortListe Die Liste von WortPaar Objekten, die gesetzt werden soll.
+     * @throws IllegalArgumentException falls die übergebene Liste null ist.
+     */
     public void setWortListe(ArrayList<WortPaar> wortListe) {
         if (wortListe != null) {
             this.wortListe = wortListe;
@@ -96,6 +106,12 @@ public class WortTrainer {
         }
     }
 
+    /**
+     * Setzt den StatistikManager für den WortTrainer.
+     *
+     * @param sm Der StatistikManager, der gesetzt werden soll.
+     * @throws IllegalArgumentException falls der übergebene StatistikManager null ist.
+     */
     public void setStatistikManager(StatistikManager sm) {
         if (sm != null) {
             this.statistikManager = sm;
@@ -104,28 +120,41 @@ public class WortTrainer {
         }
     }
 
+    /**
+     * Setzt den aktuellen Index für das nächste Wort in der Liste.
+     *
+     * @param aktuellesIndex Der Index, der gesetzt werden soll.
+     */
     public void setAktuellesIndex(int aktuellesIndex) {
         this.aktuellesIndex = aktuellesIndex;
     }
 
+    /**
+     * Gibt die aktuelle Liste der WortPaar Objekte zurück.
+     *
+     * @return Die Liste der WortPaar Objekte.
+     */
     public ArrayList<WortPaar> getWortListe() {
         return wortListe;
     }
 
+    /**
+     * Gibt den StatistikManager zurück, der die Statistiken verwaltet.
+     *
+     * @return Der StatistikManager des WortTrainers.
+     */
     public StatistikManager getStatistikManager() {
         return statistikManager;
     }
 
+    /**
+     * Gibt den aktuellen Index des WortPaars in der Liste zurück.
+     *
+     * @return Der aktuelle Index des WortPaars.
+     */
     public int getAktuellesIndex() {
         return aktuellesIndex;
     }
 
-    @Override
-    public boolean equals(Object o){
-        if(this == o) return true;
-        if(o == null || getClass() != o.getClass()) return false;
-        WortTrainer that = (WortTrainer) o;
-        return aktuellesIndex == that.aktuellesIndex && Objects.equals(wortListe, that.wortListe) && Objects.equals(statistikManager, that.statistikManager);
-    }
 
 }

@@ -52,6 +52,11 @@ public class ControlWortTrainer implements ActionListener{
 
     }
 
+    /**
+     *
+     *
+     * @param e the event to be processed
+     */
     @Override
     public void actionPerformed(ActionEvent e){
         String ac = e.getActionCommand();
@@ -90,6 +95,9 @@ public class ControlWortTrainer implements ActionListener{
 
     }
 
+    /**
+     * Diese Methode setzt vom Model die BildURL in das JLabel von der View
+     */
     public void setBildUrl() {
         WortPaar aktuellesWortPaar = this.model.getAktuellesWort();
 

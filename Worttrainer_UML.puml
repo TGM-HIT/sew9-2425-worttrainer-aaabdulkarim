@@ -114,6 +114,8 @@ package controller {
 
         + ControlWortTrainer()
         + actionPerformed(e : ActionCommand)
+
+        + setBildUrl() : void
         
     }
 }

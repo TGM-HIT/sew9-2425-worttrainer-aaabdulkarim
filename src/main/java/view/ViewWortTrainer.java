@@ -25,6 +25,10 @@ public class ViewWortTrainer extends JFrame {
 
     private JTextField textField = new JTextField();
 
+    /**
+     * Konstruktor der View. Hier wird jedes Panel zusamengebunden
+     * @param control
+     */
     public ViewWortTrainer(ControlWortTrainer control) {
         setTitle("Wort Trainer");
         setSize(1000, 800);
@@ -89,9 +93,8 @@ public class ViewWortTrainer extends JFrame {
 
 
 
-
-
     /**
+     * Erstellt das Options Panel. Hier kann man mit dem User
      *
      * @return JPanel
      */
@@ -144,6 +147,10 @@ public class ViewWortTrainer extends JFrame {
     }
 
 
+    /**
+     * Gibt den User Input im String Format zurück
+     * @return String
+     */
     public String getUserInput() {
         return this.textField.getText();
     }

@@ -52,30 +52,64 @@ public class StatistikManager {
     }
 
 
+    /**
+     * Gibt die Gesamtzahl aller Antworten zurück.
+     *
+     * @return Die Anzahl der insgesamt gegebenen Antworten.
+     */
     public int getInsgesamt() {
         return insgesamt;
     }
 
+    /**
+     * Setzt die Gesamtzahl aller Antworten.
+     *
+     * @param insgesamt Die Anzahl der insgesamt gegebenen Antworten.
+     */
     public void setInsgesamt(int insgesamt) {
         this.insgesamt = insgesamt;
     }
 
+    /**
+     * Gibt die Anzahl der richtigen Antworten zurück.
+     *
+     * @return Die Anzahl der richtigen Antworten.
+     */
     public int getAnzahlRichtig() {
         return anzahlRichtig;
     }
 
+    /**
+     * Setzt die Anzahl der richtigen Antworten.
+     *
+     * @param anzahlRichtig Die Anzahl der richtigen Antworten.
+     */
     public void setAnzahlRichtig(int anzahlRichtig) {
         this.anzahlRichtig = anzahlRichtig;
     }
 
+    /**
+     * Gibt die Anzahl der falschen Antworten zurück.
+     *
+     * @return Die Anzahl der falschen Antworten.
+     */
     public int getAnzahlFalsch() {
         return anzahlFalsch;
     }
 
+    /**
+     * Setzt die Anzahl der falschen Antworten.
+     *
+     * @param anzahlFalsch Die Anzahl der falschen Antworten.
+     */
     public void setAnzahlFalsch(int anzahlFalsch) {
         this.anzahlFalsch = anzahlFalsch;
     }
 
+    /**
+     * Repräsentiert das Objekt als String Wert
+     * @return
+     */
     @Override
     public String toString(){
         StringBuilder sb = new StringBuilder("Statistik: ");
@@ -91,6 +125,11 @@ public class StatistikManager {
         return sb.toString();
     }
 
+    /**
+     * Vergleicht StatistikManager für Testzwecke
+     * @param o
+     * @return
+     */
     @Override
     public boolean equals(Object o){
         if(this == o) return true;

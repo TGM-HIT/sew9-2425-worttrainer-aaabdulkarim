@@ -49,22 +49,44 @@ public class WortPaar {
         return this.wort.equalsIgnoreCase(antwort);
     }
 
+    /**
+     * Gibt das Wort zurück
+     * @return String
+     */
     public String getWort() {
         return wort;
     }
 
+    /**
+     * Gibt die URL des Bildes zurück
+     * @return String
+     */
     public String getBildURL() {
         return bildURL;
     }
 
+    /**
+     * Setzt das Wort
+     * @param wort
+     */
     private void setWort(String wort){
         this.wort = (wort != null) ? wort : "";
     }
 
+
+    /**
+     * Setzt die Bild URL
+     * @param bildURL
+     */
     private void setBildURL(String bildURL){
         this.bildURL = (bildURL != null) ? bildURL : "";
     }
 
+    /**
+     * Equals Methode zum Vergleichen
+     * @param o Object
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o){
         if(this == o) return true;
