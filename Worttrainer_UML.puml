@@ -97,6 +97,7 @@ package view {
 
         + setStatistik(sm : StatistikManager) : void
         + setBildURL(bildURL : String) : void
+        + setButtonEnabled(enabled : boolean) : void
         + getUserInput() : String
 
 

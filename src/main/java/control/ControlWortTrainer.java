@@ -7,6 +7,8 @@ import persistance.SpeichernLadenStrategie;
 import view.ViewWortTrainer;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -19,7 +21,7 @@ import java.net.MalformedURLException;
  * @author Amadeus Abdulkarim
  * @version 02-10-2024
  */
-public class ControlWortTrainer implements ActionListener{
+public class ControlWortTrainer implements ActionListener, DocumentListener {
 
     private WortTrainer model;
     private ViewWortTrainer view;
@@ -108,4 +110,27 @@ public class ControlWortTrainer implements ActionListener{
         }
     }
 
+    // DocumentListener methods to monitor JTextField input
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        checkUserInput();
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        checkUserInput();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        checkUserInput();
+    }
+
+    /**
+     * Checkt den User INput
+     */
+    private void checkUserInput() {
+        String userInput = view.getUserInput();
+        view.setButtonEnabled(!userInput.isBlank());  // Enable/disable based on input
+    }
 }

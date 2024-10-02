@@ -35,6 +35,8 @@ public class ViewWortTrainer extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
+
+
         // Look and Feel
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -62,6 +64,9 @@ public class ViewWortTrainer extends JFrame {
 
         nextButton.addActionListener(control);
         nextButton.setActionCommand("next");
+
+        setButtonEnabled(!getUserInput().isBlank());
+        this.textField.getDocument().addDocumentListener(control);
 
 
         setVisible(true);
@@ -101,6 +106,7 @@ public class ViewWortTrainer extends JFrame {
     public JPanel optionsPanel() {
         JPanel optionsPanel = new JPanel();
         this.textField.setPreferredSize(new Dimension(330, 75));
+        this.nextButton.setPreferredSize(new Dimension(330, 75));
         optionsPanel.add(this.textField);
         optionsPanel.add(this.nextButton);
 
@@ -153,5 +159,14 @@ public class ViewWortTrainer extends JFrame {
      */
     public String getUserInput() {
         return this.textField.getText();
+    }
+
+    /**
+     * Setzt den Button für das nächste Wort auf enabled oder disabled basierend auf boolean Wert
+     *
+     * @param enabled boolean
+     */
+    public void setButtonEnabled(boolean enabled) {
+        this.nextButton.setEnabled(enabled);
     }
 }
