@@ -82,9 +82,6 @@ package model {
 
 
 package view {
-    class FrameWortTrainer{
-        + {static} main (args: String[]) : void
-    }
 
     class ViewWortTrainer {
         - insgLabel : JLabel
@@ -126,8 +123,8 @@ WortTrainer -> "1" StatistikManager
 
 /' MVC Struktur'/
 ControlWortTrainer -> WortTrainer
-ControlWortTrainer -> ViewWortTrainer
-ControlWortTrainer -> SpeichernLadenStrategie
+ControlWortTrainer "1" -> ViewWortTrainer
+ControlWortTrainer "1" -> SpeichernLadenStrategie
 
 
 @enduml
