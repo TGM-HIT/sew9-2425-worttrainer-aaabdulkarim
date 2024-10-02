@@ -96,10 +96,13 @@ package view {
         + statistikPanel() : JPanel
         + midPanel() : JPanel
         + optionsPanel() : JPanel
+        + reset() : void
 
         + setStatistik(sm : StatistikManager) : void
         + setBildURL(bildURL : String) : void
-        + reset() : void
+        + getUserInput() : String
+
+
     }
 }
 
@@ -111,8 +114,6 @@ package controller {
 
         + ControlWortTrainer()
         + actionPerformed(e : ActionCommand)
-
-        + setSpeicherPfad(pfad : String) : void
         
     }
 }
